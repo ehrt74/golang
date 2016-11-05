@@ -1,4 +1,4 @@
-package dart
+package servemux
 
 import (
 	"net/http"
