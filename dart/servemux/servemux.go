@@ -27,6 +27,18 @@ func initPubCache() {
 	}
 }
 
+// BasePath returns the path to the web/ directory. If the Dartium browser is used, this
+// is "web/", otherwise "build/web/"
+func BasePath(r *http.Request) (path string) {
+	if !strings.Contains(r.UserAgent(), "Dart") {
+		path = "build/web/"
+	} else {
+		path = "web/"
+	}
+	return
+}
+
+// NewServeMux returns a *http.ServeMux with handlers for dart packages
 func NewServeMux() *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/packages/", packagesHandler)
